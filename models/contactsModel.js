@@ -1,0 +1,22 @@
+import { Sequelize } from "sequelize";
+import sequelize from '../config/database.js';
+import Biodata from "./biodataModel.js";
+
+const { DataTypes } = Sequelize;
+
+const Contacts = sequelize.define('detail_biodata',{
+   id_biodata: {
+        type: DataTypes.INTEGER
+    },
+    id_sosial_media: {
+        type: DataTypes.INTEGER
+    },
+    status: {
+        type: DataTypes.BOOLEAN
+    }
+},{
+    freezeTableName: true,
+    timestamps: false
+});
+
+export default Contacts;
