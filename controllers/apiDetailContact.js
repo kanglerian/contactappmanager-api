@@ -16,3 +16,25 @@ export const getDetailContact = async (req, res) => {
         res.json({message: error.message});
     }
 }
+
+export const addDetailContact = async (req, res) => {
+    try {
+        await Model.Contacts.create(req.body);
+        res.json(`Data detail contact telah ditambahkan.`);
+    } catch (error) {
+        res.json({message: error.message});
+    }
+}
+
+export const deleteDetailContact = async (req, res) => {
+    try {
+        await Model.Contacts.destroy({
+            where: {
+                id: req.body.id
+            }
+        });
+        res.json(`Data detail kontak telah dihapus.`);
+    } catch (error) {
+        res.json({message: error.message});
+    }
+}

@@ -27,7 +27,7 @@
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <a href="/registrasi" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a>
+                    <button type="button" data-toggle="modal" data-target="#addDetail" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -37,19 +37,22 @@
                                     <th>No</th>
                                     <th>Platform</th>
                                     <th>Status</th>
-                                    <!-- <th>Aksi</th> -->
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% let no = 1; %>
-                                <% platforms.forEach(platform => { %>
+                                <% details.forEach(detail => { %>
                                 <tr>
                                     <td><%= no++ %></td>
-                                    <td><%= platform.sosial_medium.nama %></td>
-                                    <td><span class="badge badge-<%= platform.status == true ? 'success' : 'danger' %>"><%= platform.status == true ? 'Aktif' : 'Tidak aktif' %></span></td>
-                                    <!-- <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                    </td> -->
+                                    <td><a href="<%= detail.sosial_medium.url %>" target="_blank"><%= detail.sosial_medium.nama %></a></td>
+                                    <td><span class="badge badge-<%= detail.status == true ? 'success' : 'danger' %>"><%= detail.status == true ? 'Aktif' : 'Tidak aktif' %></span></td>
+                                    <td>
+                                        <form action="/deletecontactdetail?_method=DELETE" method="POST" class="d-inline">
+                                            <input type="hidden" name="id" value="<%= detail.id %>">
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <% }) %>
                             </tbody>
@@ -61,3 +64,48 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+
+
+<!-- Modal Detail Contact -->
+<div class="modal fade" id="addDetail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Sosial Media</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="/addcontactdetail">
+            <div class="modal-body">
+                <input type="hidden" name="id_biodata" value="<%= biodata.id %>">
+                <div class="form-group">
+                    <label>Nama Platform</label>
+                    <select class="form-control" name="id_sosial_media">
+                        <option>Pilih</option>
+                        <% platforms.forEach(platform => { %>
+                            <option value="<%= platform.id %>"><%= platform.nama %></option>
+                        <%})%>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>URL</label>
+                    <input type="text" class="form-control" name="url">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select class="form-control" name="status">
+                        <option>Pilih</option>
+                        <option value="1">Aktif</option>
+                        <option value="0">Tidak aktif</option>
+                    </select>
+                </div>            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>

@@ -1,12 +1,12 @@
-POST http://localhost:3000/api/addcontact
+POST http://localhost:3000/api/addcontactdetail
 Content-Type: application/json
 
 {
-    "nama_lengkap":"Product 6", "email": "email", "nohp": "082333222111"
+    "id_biodata": 1, "id_sosial_media": 10, "status": true
 
 }
 ###
-DELETE http://localhost:3000/api/deletecontact
+DELETE http://localhost:3000/api/deletecontactdetail
 Content-Type: application/json
 
 {

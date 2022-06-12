@@ -5,11 +5,14 @@ import Biodata from "./biodataModel.js";
 const { DataTypes } = Sequelize;
 
 const Contacts = sequelize.define('detail_biodata',{
-   id_biodata: {
+    id_biodata: {
         type: DataTypes.INTEGER
     },
     id_sosial_media: {
         type: DataTypes.INTEGER
+    },
+    url: {
+        type: DataTypes.TEXT
     },
     status: {
         type: DataTypes.BOOLEAN

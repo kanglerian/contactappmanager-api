@@ -66,3 +66,38 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+
+
+<!-- Modal Add Contact-->
+<div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah kontak baru</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="/addcontact">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" class="form-control" name="nama_lengkap" placeholder="Tulis nama lengkap disini...">
+                </div>
+                <div class="form-group">
+                    <label>E-Mail</label>
+                    <input type="email" class="form-control" name="email" placeholder="Tulis E-mail disini...">
+                </div>
+                <div class="form-group">
+                    <label>No Handphone</label>
+                    <input type="number" class="form-control" name="nohp" placeholder="Tulis no handphone disini...">
+                </div>            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
