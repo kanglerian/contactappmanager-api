@@ -18,7 +18,7 @@ aria-hidden="true">
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Add Contact-->
 <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -41,6 +41,33 @@ aria-hidden="true">
                 <div class="form-group">
                     <label>No Handphone</label>
                     <input type="number" class="form-control" name="nohp" placeholder="Tulis no handphone disini...">
+                </div>            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+
+<!-- Modal Add Platform-->
+<div class="modal fade" id="addPlatform" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah platform baru</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="/addplatform">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" class="form-control" name="nama" placeholder="Tulis nama platform disini...">
                 </div>            
             </div>
             <div class="modal-footer">

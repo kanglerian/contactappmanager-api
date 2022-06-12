@@ -44,37 +44,6 @@ export const deleteContact = async (req, res) => {
     }
 }
 
-export const getAllPlatforms = async (req, res) => {
-    try {
-        const platform = await Model.Sosmed.findAll();
-        res.json(platform);
-    } catch (error) {
-        res.json({message: error.message});
-    }
-}
-
-export const getPlatform = async (req, res) => {
-    try {
-        const cuan = await Model.Sosmed.findOne({
-            where: {
-                id: req.params.id
-            }
-        });
-        res.json(cuan);
-    } catch (error) {
-        res.json({message: error.message});
-    }
-}
-
-export const addPlatform = async (req, res) => {
-    try {
-        await Model.Sosmed.create(req.body);
-        res.json({message: `Data ${req.body.nama} telah tersimpan.`});
-    } catch (error) {
-        res.json({message: error.message});
-    }
-}
-
 export const getDetailContact = async (req, res) => {
     try {
         const contacts = await Model.Contacts.findAll({

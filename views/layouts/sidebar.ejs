@@ -14,13 +14,19 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        DATA CLIENT
+        DATA
     </div>
 
-    <li class="nav-item active">
+    <li class="nav-item <%= url === '/' ? 'active' : '' %>">
         <a class="nav-link" href="/">
             <i class="fas fa-users"></i>
             <span>Daftar Kontak</span></a>
+    </li>
+
+    <li class="nav-item <%= url === '/platforms' ? 'active' : '' %>">
+        <a class="nav-link" href="/platforms">
+            <i class="fas fa-laptop"></i>
+            <span>Daftar Platform</span></a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->

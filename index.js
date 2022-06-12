@@ -2,7 +2,10 @@ import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
 import expressLayouts from 'express-ejs-layouts';
-import { getAllContacts, getDetailContact, getAllPlatforms, getContact, addContact, deleteContact, getPlatform, addPlatform } from './controllers/apiContacts.js';
+import { getAllContacts, getContact, addContact, deleteContact } from './controllers/apiContacts.js';
+import { getDetailContact } from './controllers/apiContacts.js';
+import { addPlatform, deletePlatform, getAllPlatforms, getPlatform } from './controllers/apiPlatforms.js';
+
 const app = express();
 const port = 3000;
 
@@ -22,7 +25,8 @@ app.get('/', (req, res) => {
     .then((response) => {
         res.render('index',{
             layout: 'layouts/dashboard',
-            contacts: response.data
+            contacts: response.data,
+            url: req.url
         });
     });
 });
@@ -37,12 +41,17 @@ app.get('/detail/:id', (req, res) => {
             layout: 'layouts/dashboard',
             biodata: biodata.data,
             platforms: detail.data,
+            url: req.url
         });
     }));
 });
 
-app.delete('/deletecontact', (req, res) => {
-    axios.get(`http://localhost:3000/api/deletecontact/${req.body.id}`)
+app.delete('/deletecontact', async (req, res) => {
+    await axios.delete(`http://localhost:3000/api/deletecontact`,{
+        data: {
+            id: req.body.id
+        }
+    })
     .then(() => {
         res.redirect('/');
     })
@@ -62,14 +71,49 @@ app.post('/addcontact', (req, res) => {
     });
 });
 
+app.get('/platforms', (req, res) => {
+    axios.get('http://localhost:3000/api/platforms')
+    .then((response) => {
+        res.render('platforms',{
+            layout: 'layouts/dashboard',
+            platforms: response.data,
+            url: req.url
+        });
+    });
+});
+
+app.post('/addplatform', (req, res) => {
+    axios.post(`http://localhost:3000/api/addplatform`,{
+        nama: req.body.nama
+    })
+    .then(() => {
+        res.redirect('/platforms');
+    });
+});
+
+app.delete('/deleteplatform', (req, res) => {
+    axios.delete(`http://localhost:3000/api/deleteplatform`,{
+        data: {
+            id: req.body.id
+        }
+    })
+    .then(() => {
+        res.redirect('/platforms');
+    })
+    .catch((error) => {
+        res.send(error);
+    });
+});
+
 app.use('/api/contacts', getAllContacts);
-app.use('/api/addcontact', addContact);
-app.use('/api/deletecontact/:id', deleteContact);
 app.use('/api/contact/:id', getContact);
+app.use('/api/addcontact', addContact);
+app.use('/api/deletecontact', deleteContact);
 
 app.use('/api/platforms', getAllPlatforms);
 app.use('/api/platform/:id', getPlatform);
 app.use('/api/addplatform', addPlatform);
+app.use('/api/deleteplatform', deletePlatform);
 
 app.use('/api/detail/:id', getDetailContact);
 
