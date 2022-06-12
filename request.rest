@@ -1,0 +1,15 @@
+POST http://localhost:3000/api/addcontact
+Content-Type: application/json
+
+{
+    "nama_lengkap":"Product 6", "email": "email", "nohp": "082333222111"
+
+}
+###
+POST http://localhost:3000/api/addplatform
+Content-Type: application/json
+
+{
+    "nama": "Whatsapp"
+
+}

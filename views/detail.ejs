@@ -9,9 +9,9 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <h5><%= platforms[0].biodatum.nama_lengkap %></h5>
-                            <p><%= platforms[0].biodatum.email %></p>
-                            <span class="bg-primary text-white px-3 py-1 inline-block"><%= platforms[0].biodatum.nohp %></span>
+                            <h5><%= biodata.nama_lengkap %></h5>
+                            <p><%= biodata.email %></p>
+                            <span class="bg-primary text-white px-3 py-1 inline-block"><%= biodata.nohp %></span>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-database fa-2x text-gray-300"></i>
@@ -37,7 +37,7 @@
                                     <th>No</th>
                                     <th>Platform</th>
                                     <th>Status</th>
-                                    <th>Aksi</th>
+                                    <!-- <th>Aksi</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,9 +47,9 @@
                                     <td><%= no++ %></td>
                                     <td><%= platform.sosial_medium.nama %></td>
                                     <td><span class="badge badge-<%= platform.status == true ? 'success' : 'danger' %>"><%= platform.status == true ? 'Aktif' : 'Tidak aktif' %></span></td>
-                                    <td>
+                                    <!-- <td>
                                         <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <% }) %>
                             </tbody>
