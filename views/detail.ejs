@@ -1,0 +1,63 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-md-12 col-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <h5><%= platforms[0].biodatum.nama_lengkap %></h5>
+                            <p><%= platforms[0].biodatum.email %></p>
+                            <span class="bg-primary text-white px-3 py-1 inline-block"><%= platforms[0].biodatum.nohp %></span>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-database fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <a href="/registrasi" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Platform</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% let no = 1; %>
+                                <% platforms.forEach(platform => { %>
+                                <tr>
+                                    <td><%= no++ %></td>
+                                    <td><%= platform.sosial_medium.nama %></td>
+                                    <td><span class="badge badge-<%= platform.status == true ? 'success' : 'danger' %>"><%= platform.status == true ? 'Aktif' : 'Tidak aktif' %></span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
