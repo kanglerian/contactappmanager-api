@@ -45,7 +45,7 @@
                                 <% details.forEach(detail => { %>
                                 <tr>
                                     <td><%= no++ %></td>
-                                    <td><a href="<%= detail.sosial_medium.url %>" target="_blank"><%= detail.sosial_medium.nama %></a></td>
+                                    <td><a href="<%= detail.url %>" target="_blank"><%= detail.sosial_medium.nama %></a></td>
                                     <td><span class="badge badge-<%= detail.status == true ? 'success' : 'danger' %>"><%= detail.status == true ? 'Aktif' : 'Tidak aktif' %></span></td>
                                     <td>
                                         <form action="/deletecontactdetail?_method=DELETE" method="POST" class="d-inline">

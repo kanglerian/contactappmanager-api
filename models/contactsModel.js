@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 import sequelize from '../config/database.js';
-import Biodata from "./biodataModel.js";
 
 const { DataTypes } = Sequelize;
 
