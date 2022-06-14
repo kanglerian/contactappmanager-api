@@ -27,6 +27,7 @@
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
+                    <button type="button" data-toggle="modal" data-target="#editBiodata" class="btn btn-primary btn-sm mr-3"><i class="fas fa-user-edit"></i> Edit Biodata</>
                     <button type="button" data-toggle="modal" data-target="#addDetail" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah Data</>
                 </div>
                 <div class="card-body">
@@ -48,6 +49,51 @@
                                     <td><a href="<%= detail.url %>" target="_blank"><%= detail.sosial_medium.nama %></a></td>
                                     <td><span class="badge badge-<%= detail.status == true ? 'success' : 'danger' %>"><%= detail.status == true ? 'Aktif' : 'Tidak aktif' %></span></td>
                                     <td>
+                                        <button type="button" data-toggle="modal" data-target="#editDetailContact<%= detail.id %>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                        <!-- Modal Tambah Sosial Media -->
+                                        <div class="modal fade" id="editDetailContact<%= detail.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title">Edit <%= detail.sosial_medium.nama %></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <form method="POST" action="/updatecontactdetail?_method=PATCH">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="id" value="<%= detail.id %>">
+                                                        <input type="hidden" name="id_biodata" value="<%= detail.id_biodata %>">
+                                                        <div class="form-group">
+                                                            <label>Nama Platform</label>
+                                                            <select class="form-control" name="id_sosial_media">
+                                                                <option value="<%= detail.sosial_medium.id %>"><%= detail.sosial_medium.nama %></option>
+                                                                <% platforms.forEach(platform => { %>
+                                                                    <option value="<%= platform.id %>"><%= platform.nama %></option>
+                                                                <%})%>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>URL</label>
+                                                            <input type="text" class="form-control" name="url" value="<%= detail.url %>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Status</label>
+                                                            <select class="form-control" name="status">
+                                                                <option value="<%= detail.status %>"><%= detail.status === true ? 'Aktif' : 'Tidak aktif' %></option>
+                                                                <option value="1">Aktif</option>
+                                                                <option value="0">Tidak aktif</option>
+                                                            </select>
+                                                        </div>            
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            </div>
+                                        </div>
                                         <form action="/deletecontactdetail?_method=DELETE" method="POST" class="d-inline">
                                             <input type="hidden" name="id" value="<%= detail.id %>">
                                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
@@ -56,7 +102,7 @@
                                 </tr>
                                 <% }) %>
                             </tbody>
-                        </table>
+                        </table>4
                     </div>
                 </div>
             </div>
@@ -67,6 +113,41 @@
 
 
 <!-- Modal Detail Contact -->
+<div class="modal fade" id="editBiodata" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Biodata</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="/updatecontact?_method=PATCH">
+            <div class="modal-body">
+                <input type="hidden" name="id" value="<%= biodata.id %>">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" class="form-control" name="nama_lengkap" value="<%= biodata.nama_lengkap %>">
+                </div>
+                <div class="form-group">
+                    <label>E-Mail</label>
+                    <input type="email" class="form-control" name="email" value="<%= biodata.email %>">
+                </div>
+                <div class="form-group">
+                    <label>No Handphone</label>
+                    <input type="number" class="form-control" name="nohp" value="<%= biodata.nohp %>">
+                </div>           
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<!-- Modal Tambah Sosial Media -->
 <div class="modal fade" id="addDetail" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

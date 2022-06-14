@@ -31,6 +31,19 @@ export const addPlatform = async (req, res) => {
     }
 }
 
+export const updatePlatform = async (req, res) => {
+    try {
+        await Model.Sosmed.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({message: `Data telah diupdate`});
+    } catch (error) {
+        res.json({message: error.message});
+    }
+}
+
 export const deletePlatform = async (req, res) => {
     try {
         await Model.Sosmed.destroy({

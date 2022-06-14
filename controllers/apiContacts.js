@@ -31,6 +31,19 @@ export const addContact = async (req, res) => {
     }
 }
 
+export const updateContact = async (req, res) => {
+    try {
+        await Model.Biodata.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({message: `Data telah diupdate.`});
+    } catch (error) {
+        res.json({message: error.message});
+    }
+}
+
 export const deleteContact = async (req, res) => {
     try {
         await Model.Biodata.destroy({
@@ -39,23 +52,6 @@ export const deleteContact = async (req, res) => {
             }
         });
         res.json({message: `Data dengan ID ${req.body.id} telah dihapus.`});
-    } catch (error) {
-        res.json({message: error.message});
-    }
-}
-
-export const getDetailContact = async (req, res) => {
-    try {
-        const contacts = await Model.Contacts.findAll({
-            where: {
-                id_biodata: req.params.id
-            },
-            include: [
-                {model: Model.Biodata},
-                {model: Model.Sosmed}
-            ],
-        });
-        res.json(contacts);
     } catch (error) {
         res.json({message: error.message});
     }

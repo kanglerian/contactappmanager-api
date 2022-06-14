@@ -45,6 +45,33 @@
                                     <td><%= no++ %></td>
                                     <td><%= platform.nama %></td>
                                     <td>
+                                        <button type="button" data-toggle="modal" data-target="#editPlatform<%= platform.id %>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                        <!-- Modal Edit Platform-->
+                                        <div class="modal fade" id="editPlatform<%= platform.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title">Edit <%= platform.nama %></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <form method="POST" action="/updateplatform?_method=PATCH">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="id" value="<%= platform.id %>">
+                                                        <div class="form-group">
+                                                            <label>Nama</label>
+                                                            <input type="text" class="form-control" name="nama" value="<%= platform.nama %>">
+                                                        </div>            
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            </div>
+                                        </div>
                                         <form action="/deleteplatform?_method=DELETE" method="POST" class="d-inline">
                                             <input type="hidden" name="id" value="<%= platform.id %>">
                                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
@@ -61,7 +88,6 @@
     </div>
 </div>
 <!-- /.container-fluid -->
-
 
 <!-- Modal Add Platform-->
 <div class="modal fade" id="addPlatform" tabindex="-1" role="dialog" aria-hidden="true">

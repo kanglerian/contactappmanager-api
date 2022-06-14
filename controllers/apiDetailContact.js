@@ -26,6 +26,19 @@ export const addDetailContact = async (req, res) => {
     }
 }
 
+export const updateDetailContact = async (req, res) => {
+    try {
+        await Model.Contacts.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({message: `Data telah diupdate.`});
+    } catch (error) {
+        res.json({message: error.message});
+    }
+}
+
 export const deleteDetailContact = async (req, res) => {
     try {
         await Model.Contacts.destroy({

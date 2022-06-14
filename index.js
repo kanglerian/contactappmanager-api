@@ -2,9 +2,9 @@ import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
 import expressLayouts from 'express-ejs-layouts';
-import { getAllContacts, getContact, addContact, deleteContact } from './controllers/apiContacts.js';
-import { getDetailContact, addDetailContact, deleteDetailContact } from './controllers/apiDetailContact.js';
-import { addPlatform, deletePlatform, getAllPlatforms, getPlatform } from './controllers/apiPlatforms.js';
+import { getAllContacts, getContact, addContact, deleteContact, updateContact } from './controllers/apiContacts.js';
+import { getDetailContact, addDetailContact, deleteDetailContact, updateDetailContact } from './controllers/apiDetailContact.js';
+import { addPlatform, deletePlatform, getAllPlatforms, getPlatform, updatePlatform } from './controllers/apiPlatforms.js';
 
 const app = express();
 const port = 3000;
@@ -73,6 +73,20 @@ app.post('/addcontact', (req, res) => {
     });
 });
 
+app.patch('/updatecontact', (req, res) => {
+    axios.patch(`http://localhost:3000/api/updatecontact/${req.body.id}`,{
+        nama_lengkap: req.body.nama_lengkap,
+        email: req.body.email,
+        nohp: req.body.nohp
+    })
+    .then(() => {
+        res.redirect('back');
+    })
+    .catch((error) => {
+        res.send(error);
+    });
+});
+
 app.get('/platforms', (req, res) => {
     axios.get('http://localhost:3000/api/platforms')
     .then((response) => {
@@ -90,6 +104,18 @@ app.post('/addplatform', (req, res) => {
     })
     .then(() => {
         res.redirect('/platforms');
+    });
+});
+
+app.patch('/updateplatform', (req, res) => {
+    axios.patch(`http://localhost:3000/api/updateplatform/${req.body.id}`, {
+        nama: req.body.nama
+    })
+    .then(() => {
+        res.redirect('back');
+    })
+    .catch((error) => {
+        res.send(error);
     });
 });
 
@@ -119,6 +145,21 @@ app.post('/addcontactdetail', (req, res) => {
     });
 });
 
+app.patch('/updatecontactdetail', (req, res) => {
+    axios.patch(`http://localhost:3000/api/updatecontactdetail/${req.body.id}`, {
+        id_biodata: req.body.id_biodata,
+        id_sosial_media: req.body.id_sosial_media,
+        url: req.body.url,
+        status: req.body.status
+    })
+    .then(() => {
+        res.redirect('back');
+    })
+    .catch((error) => {
+        res.send(error);
+    });
+});
+
 app.delete('/deletecontactdetail', (req, res) => {
     axios.delete('http://localhost:3000/api/deletecontactdetail',{
         data: {
@@ -133,15 +174,18 @@ app.delete('/deletecontactdetail', (req, res) => {
 app.use('/api/contacts', getAllContacts);
 app.use('/api/contact/:id', getContact);
 app.use('/api/addcontact', addContact);
+app.use('/api/updatecontact/:id', updateContact);
 app.use('/api/deletecontact', deleteContact);
 
 app.use('/api/platforms', getAllPlatforms);
 app.use('/api/platform/:id', getPlatform);
 app.use('/api/addplatform', addPlatform);
+app.use('/api/updateplatform/:id', updatePlatform);
 app.use('/api/deleteplatform', deletePlatform);
 
 app.use('/api/detail/:id', getDetailContact);
 app.use('/api/addcontactdetail', addDetailContact);
+app.use('/api/updatecontactdetail/:id', updateDetailContact);
 app.use('/api/deletecontactdetail', deleteDetailContact);
 
 app.listen(port, () => console.log(`Apps run on http://localhost:${port}`));

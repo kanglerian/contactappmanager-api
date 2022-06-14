@@ -13,3 +13,11 @@ Content-Type: application/json
     "id": 12
 
 }
+
+###
+PATCH http://localhost:3000/api/updatecontactdetail/24
+Content-Type: application/json
+
+{
+    "status": 0
+}
